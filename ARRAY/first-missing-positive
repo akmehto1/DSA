@@ -1,0 +1,41 @@
+
+
+int partition(int arr[],int n){
+    int i=0;
+    int j=n-1;
+
+    while(i<=j){
+        if(arr[i]<=0){
+            swap(arr[i],arr[j--]);
+        }
+
+        else i++;
+
+    }
+
+    return j+1;
+}
+
+
+int firstMissing(int arr[], int n)
+{
+     int partition_index=partition(arr,n);
+
+     for(int i=0;i<partition_index;i++){
+           int val=abs(arr[i]);
+
+           if(val-1<partition_index and arr[val-1]>0){
+               arr[val-1]=-arr[val-1];
+           }
+
+     }
+
+
+     for(int i=0;i<partition_index;i++){
+         if(arr[i]>0)return i+1;
+     } 
+
+
+  return partition_index+1;
+    // Write your code here.
+}
